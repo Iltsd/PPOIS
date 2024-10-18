@@ -1,22 +1,21 @@
 #pragma once
 
 #include <iostream>
-#include <map>
+#include <unordered_map>
 #include <memory>
-#include <variant>
 #include <string>
 #include <vector>
 
 
 class Multiset {
 private:
-    std::map<char, int> elements;
-    std::map<std::shared_ptr<Multiset>, int> subset;
+    std::unordered_map<char, int> elements;
+    std::unordered_map<std::shared_ptr<Multiset>, int> subset;
 
 public:
     Multiset();
     Multiset(const std::string& str);
-    Multiset(const char*& str1);
+    Multiset(const char* str1);
     Multiset(const std::shared_ptr<Multiset>&);
     void uniqueSubsets();
     void add(char element, int count = 1);
@@ -28,7 +27,7 @@ public:
     void isEmpty();
 
 
-    Multiset& operator[](const std::string& str);
+    int operator[](const std::string& str);
     bool operator ==(const Multiset& set2);
     Multiset operator+(const std::shared_ptr<Multiset>& set);
     Multiset operator+=(const std::shared_ptr<Multiset>& set);
@@ -40,8 +39,10 @@ public:
     std::vector<Multiset> boolean() const;
 
 
-
+    std::unordered_map<char, int> getElements();
+    std::unordered_map<std::shared_ptr<Multiset>, int> getSubsets();
 };
 
     bool enoughBrackets(const std::string& str);
     void showPowerSet(std::vector<Multiset> powerSet);
+    int subsetSize(const std::string& str);

@@ -17,6 +17,8 @@ int main()
 			std::string str;
 			std::cin >> std::ws;
 			getline(std::cin, str);
+			//char* str = new char[100];
+			//std::cin >> str;
 			if (enoughBrackets(str))
 			{
 				mas.push_back(std::make_shared<Multiset>(str));
@@ -53,7 +55,10 @@ int main()
 					std::cout << "Введите элемент: ";
 					std::cin >> std::ws;
 					getline(std::cin, str);
-					mas[first - 1]->add(str[0]);
+					int count = 1;
+					std::cout << "Введите количество повторений: " << std::endl;
+					std::cin >> count;
+					mas[first - 1]->add(str[0], count);
 				}
 				break;
 			}
@@ -68,8 +73,11 @@ int main()
 				getline(std::cin, str);
 				if (first > 0 && enoughBrackets(str))
 				{
+					int count = 1;
+					std::cout << "Введите количество повторений: " << std::endl;
+					std::cin >> count;
 					auto temp = std::make_shared<Multiset>(str);
-					mas[first - 1]->add(temp);
+					mas[first - 1]->add(temp,count);
 					mas[first - 1]->uniqueSubsets();
 				}
 				break;
@@ -102,7 +110,7 @@ int main()
 
 				int first = 0;
 				first = get(mas, first);
-				if (first > 0)
+				if (first > 0 && mas[first - 1]->getElements().size() > 0)
 				{
 					std::string str;
 					std::cout << "Введите элемент: ";
@@ -110,6 +118,7 @@ int main()
 					getline(std::cin, str);
 					mas[first - 1]->remove(str[0]);
 				}
+				else std::cout << "Некорректное значение\n" << std::endl;
 				break;
 			}
 			case '2':
@@ -120,11 +129,13 @@ int main()
 				std::cout << "Введите подмножество. Подмножества начинаются со скобочки: ";
 				std::cin >> std::ws;
 				getline(std::cin, str);
-				if (first > 0 && enoughBrackets(str))
+				str = "{"+ str + "}";
+				if (first > 0 && enoughBrackets(str) && mas[first-1]->getSubsets().size()>0)
 				{
 					auto temp = std::make_shared<Multiset>(str);
 					mas[first - 1]->remove(temp);
 				}
+				else std::cout << "Некорректное значение\n" << std::endl;
 				break;
 			}
 
