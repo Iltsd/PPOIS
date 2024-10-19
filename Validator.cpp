@@ -1,5 +1,4 @@
 #include "User.h"
-#include "User.h"
 
 
 int get(std::vector<std::shared_ptr<Multiset>>& mas, int& first, int& second)
