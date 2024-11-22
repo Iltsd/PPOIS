@@ -13,7 +13,7 @@ void ExamSession::printExams()
 {
 	for (int i = 0;i < examSchedule.size();++i)
 	{
-		std::cout << i+1 << " έκηΰμεν: " << std::endl;
+		std::cout << i+1 << " ΓΓªΓ§Γ Γ¬Γ¥Γ­: " << std::endl;
 		examSchedule[i]->printExam();
 	}
 }
